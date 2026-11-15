@@ -1,49 +1,52 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <winsock2.h>
-#pragma comment(lib, "ws2_32.lib")
+#include <unistd.h>
+#include <arpa/inet.h>
 
 #define PORT 8080
 
 int main() {
-    WSADATA wsa;
-    SOCKET server, client;
+    int server, client;
     struct sockaddr_in addr;
-    char buffer[1024] = {0};
-    char *msg = "Hello from TCP Server!";
-
-    WSAStartup(MAKEWORD(2,2), &wsa);
+    char buffer[1024] = {0}, msg[1024];
 
     // Socket creation
     server = socket(AF_INET, SOCK_STREAM, 0);
 
-    // Address configuration
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = INADDR_ANY;
     addr.sin_port = htons(PORT);
 
-    // Bind
+    // Bind and Listen
     bind(server, (struct sockaddr *)&addr, sizeof(addr));
-
-    // Listen
     listen(server, 3);
-    printf("Server listening on port %d...\n", PORT);
+
+    printf("Server listening...\n");
 
     // Accept connection
     client = accept(server, NULL, NULL);
+    printf("Client connected!\n");
 
-    // Data transfer
+    // Receive data
     recv(client, buffer, sizeof(buffer)-1, 0);
     printf("Client: %s\n", buffer);
 
-    send(client, msg, strlen(msg), 0);
-    printf("Response sent!\n");
+    // Terminal input
+    printf("Enter reply: ");
+    fgets(msg, sizeof(msg), stdin);
 
-    // Closing
-    closesocket(client);
-    closesocket(server);
-    WSACleanup();
+    // Send data
+    send(client, msg, strlen(msg), 0);
+
+    // Close
+    close(client);
+    close(server);
 
     return 0;
 }
+
+
+
+//Connect from another terminal:
+//nc 127.0.0.1 8080
