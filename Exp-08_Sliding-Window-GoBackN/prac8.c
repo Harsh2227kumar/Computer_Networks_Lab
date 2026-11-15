@@ -132,51 +132,34 @@ void receiver(int frames[], int start, int window_size, int size) {
 ================================================================================
                     LAB PRACTICAL EXAMINATION WRITE-UP (5 MARKS)
 ================================================================================
+# **Go-Back-N (GBN) Sliding Window Protocol**
 
-1. AIM:
-   To simulate the Go-Back-N (GBN) Sliding Window Protocol for flow control and
-   error recovery in C, demonstrating pipelined transmission and window sliding.
+### **1. AIM**
 
-2. THEORY:
-   - Sliding Window Concept: A flow control and error control technique used at
-     the Data Link Layer and Transport Layer. It allows the sender to transmit
-     multiple consecutive frames before receiving an acknowledgment, maximizing
-     channel bandwidth utilization (pipelining).
-   - Go-Back-N (GBN) Mechanics:
-     * Sender Window Size ($N$): Up to $2^m - 1$ frames (where $m$ is sequence
-       number bit width).
-     * Receiver Window Size: Always strictly 1. The receiver only accepts frames
-       in strict sequential order. Any out-of-order frame is discarded.
-     * Cumulative Acknowledgment: ACK $k$ confirms that all frames up to $k-1$
-       have been received successfully.
-     * Error Recovery ("Go Back $N$"): If frame $k$ is lost or corrupted, the
-       receiver rejects frame $k$ and all subsequent frames ($k+1, k+2, \dots$).
-       When the sender timer for frame $k$ expires, the sender must retransmit
-       all frames in the current window starting from frame $k$.
+To simulate the Go-Back-N (GBN) Sliding Window Protocol in C, demonstrating frame transmission, acknowledgment, window sliding and retransmission.
 
-3. EXPLANATION / ALGORITHM:
-   - Step 1: Prompt user for total number of frames to transmit ($n \le 50$) and
-     sender window size ($window\_size \le n$).
-   - Step 2: Initialize frame array: frames[i] = i for i = 0 to n - 1.
-   - Step 3: Maintain window pointer variable base = 0.
-   - Step 4: Sender loop:
-     * Transmit all frames currently within window: from base to min(base + window_size, n).
-     * Display current sender window frames and transmission status.
-   - Step 5: Receiver simulation:
-     * For each frame in the window, receiver simulates reception and prints
-       corresponding acknowledgment ACK = frame + 1.
-   - Step 6: Error Simulation Prompt:
-     * Ask user: "Did all frames receive correctly? (y/n)".
-     * If 'y' / 'Y': Transmission successful! Advance window pointer by window size
-       (base += window_size). Window slides forward.
-     * If 'n' / 'N': Error detected! Sender initiates Go-Back-N retransmission;
-       base remains unchanged, and the entire window is re-sent from frames[base].
-   - Step 7: Repeat until all frames (base >= n) are acknowledged.
+### **2. THEORY**
 
-4. CONCLUSION:
-   Successfully implemented and verified the Go-Back-N Sliding Window Protocol
-   simulation in C. Demonstrated pipelined frame transmission, cumulative ACK
-   generation, window sliding upon acknowledgment, and retransmission of the full
-   window upon transmission error.
-================================================================================
-*/
+The Go-Back-N (GBN) Sliding Window Protocol is a flow control and error control technique used in computer networks. It allows the sender to transmit multiple frames before receiving acknowledgments, improving transmission efficiency through pipelining.
+
+In this protocol, the sender can transmit multiple frames according to its window size, while the receiver accepts only one frame at a time in sequential order. The receiver sends acknowledgments (ACK) for successfully received frames.
+
+If a frame is lost or damaged, the receiver discards that frame and subsequent out-of-order frames. The sender then retransmits the lost frame and all following frames in the current window. This process continues until all frames are successfully acknowledged.
+
+### **3. ALGORITHM**
+
+1. Start and input the total number of frames (`n`) and window size (`w`).
+2. Initialize `base = 0`.
+3. Send frames from `base` to `base + w - 1`, or until all frames are sent.
+4. Display received frames and their acknowledgments (ACK).
+5. Ask the user whether all frames were received correctly.
+6. If Yes (`Y`), slide the window forward by updating `base = base + w`.
+7. If No (`N`), retransmit all frames in the current window without changing `base`.
+8. Repeat until all frames are acknowledged.
+9. Stop.
+
+### **4. CONCLUSION**
+
+Successfully implemented the Go-Back-N Sliding Window Protocol in C. Demonstrated multiple frame transmission, acknowledgment, window sliding and retransmission when an error occurs.
+
+    */
