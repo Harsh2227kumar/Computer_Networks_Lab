@@ -10,7 +10,7 @@
 #define MAX_FRAMES 50
 
 void sender(int frames[], int size, int window_size);
-void receiver(int frames[], int start, int window_size);
+void receiver(int frames[], int start, int window_size, int size);
 
 int main() {
     int n, window_size;
@@ -53,7 +53,7 @@ void sender(int frames[], int size, int window_size) {
         }
 
         printf("\nSimulating receiver...\n");
-        receiver(frames, base, window_size);
+        receiver(frames, base, window_size, size);
 
         printf("\nDid all frames receive correctly? (y/n): ");
         scanf(" %c", &choice);
@@ -68,8 +68,8 @@ void sender(int frames[], int size, int window_size) {
     printf("\nAll frames sent successfully!\n");
 }
 
-void receiver(int frames[], int start, int window_size) {
-    for (int i = start; i < start + window_size; i++) {
+void receiver(int frames[], int start, int window_size, int size) {
+    for (int i = start; i < start + window_size && i < size; i++) {
         printf("Received frame: %d, sending ACK: %d\n", frames[i], frames[i] + 1);
     }
 }
