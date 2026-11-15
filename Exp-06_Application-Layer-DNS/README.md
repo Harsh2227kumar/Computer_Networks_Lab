@@ -53,6 +53,31 @@ Response Header: Contains Answer RRs (Resource Records), TTL (Time to Live), and
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--
 ================================================================================
                     LAB PRACTICAL EXAMINATION WRITE-UP (5 MARKS)
@@ -68,7 +93,10 @@ To analyze Application Layer Domain Name System (DNS) protocol transactions by p
 * **DNS Architecture:** A distributed, hierarchical database system operating at the Application Layer that maps human-readable domain names (FQDN) into numerical IP addresses (IPv4/IPv6).
 * **Transport Port & Protocol:** Typically uses **UDP Port 53** for standard queries due to minimal overhead and fast response times; uses **TCP Port 53** when response payload exceeds 512 bytes (EDNS0 allows up to 4096 bytes) or during DNS zone transfers.
 * **DNS Hierarchy:**
-  `Root Domain (.)` $ightarrow$ `Top-Level Domain (TLD: .com, .org)` $ightarrow$ `Authoritative/Second-Level Domain (google.com)` $ightarrow$ `Subdomain (mail.google.com)`.
+  `Root Domain (.)` $
+ightarrow$ `Top-Level Domain (TLD: .com, .org)` $
+ightarrow$ `Authoritative/Second-Level Domain (google.com)` $
+ightarrow$ `Subdomain (mail.google.com)`.
 * **Common Resource Record (RR) Types:**
   - `A`: Maps hostname to 32-bit IPv4 address.
   - `AAAA`: Maps hostname to 128-bit IPv6 address.
@@ -95,3 +123,4 @@ To analyze Application Layer Domain Name System (DNS) protocol transactions by p
 
 ### 4. CONCLUSION
 Successfully performed domain name resolution using `nslookup` and captured DNS application layer packets using Wireshark. Verified the 12-byte DNS header format, Transaction ID matching mechanism, Recursion Desired/Available flags, and Resource Record structure.
+-->

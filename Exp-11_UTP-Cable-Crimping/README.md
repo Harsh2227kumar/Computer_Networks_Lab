@@ -54,6 +54,31 @@ Batch: B2
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--
 ================================================================================
                     LAB PRACTICAL EXAMINATION WRITE-UP (5 MARKS)
@@ -93,3 +118,4 @@ To study physical transmission media (CAT6 Unshielded Twisted Pair) and fabricat
 
 ### 4. CONCLUSION
 Successfully fabricated and tested CAT6 Ethernet patch cables using RJ45 connectors. Verified T568B wiring pinout continuity using a LAN cable tester and understood the structural distinction between Straight-Through and Crossover cable applications.
+-->

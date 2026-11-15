@@ -51,6 +51,31 @@ Batch: B2
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--
 ================================================================================
                     LAB PRACTICAL EXAMINATION WRITE-UP (5 MARKS)
@@ -68,9 +93,12 @@ To capture, inspect, and comparatively analyze Transmission Control Protocol (TC
   - **Header Size:** 20 to 60 Bytes (variable length depending on Options field).
   - **Control Flags (6 bits minimum):** `URG`, `ACK`, `PSH`, `RST`, `SYN`, `FIN`.
   - **Connection Establishment (3-Way Handshake):**
-    1. Client $ightarrow$ Server: `[SYN]`, Seq = Initial Seq Number ($ISN_c$).
-    2. Server $ightarrow$ Client: `[SYN, ACK]`, Seq = $ISN_s$, Ack = $ISN_c + 1$.
-    3. Client $ightarrow$ Server: `[ACK]`, Seq = $ISN_c + 1$, Ack = $ISN_s + 1$.
+    1. Client $
+ightarrow$ Server: `[SYN]`, Seq = Initial Seq Number ($ISN_c$).
+    2. Server $
+ightarrow$ Client: `[SYN, ACK]`, Seq = $ISN_s$, Ack = $ISN_c + 1$.
+    3. Client $
+ightarrow$ Server: `[ACK]`, Seq = $ISN_c + 1$, Ack = $ISN_s + 1$.
   - **Reliability:** Maintained through Sequence Numbers, Acknowledgments, Retransmission Timers (RTO), and Checksum.
   - **Flow Control:** Sliding Window mechanism via Advertised Window Size field.
 * **UDP Protocol Structure & Mechanisms:**
@@ -83,7 +111,9 @@ To capture, inspect, and comparatively analyze Transmission Control Protocol (TC
 2. **TCP Analysis:**
    - In browser/terminal, access an HTTP/HTTPS website to initiate TCP traffic.
    - Apply Wireshark filter: `tcp.flags.syn == 1`.
-   - Locate and examine the 3-Way Handshake sequence (`SYN` $ightarrow$ `SYN, ACK` $ightarrow$ `ACK`).
+   - Locate and examine the 3-Way Handshake sequence (`SYN` $
+ightarrow$ `SYN, ACK` $
+ightarrow$ `ACK`).
    - Inspect Sequence Numbers (relative vs. raw), Acknowledgment Numbers, TCP Header Length (Data Offset), Window Size scaling, and MSS (Maximum Segment Size) in TCP Options.
    - Inspect connection termination: locate `FIN` and `ACK` segments.
 3. **UDP Analysis:**
@@ -93,3 +123,4 @@ To capture, inspect, and comparatively analyze Transmission Control Protocol (TC
 
 ### 4. CONCLUSION
 Successfully inspected and compared Transport Layer protocols using Wireshark. Confirmed that TCP provides reliable, ordered data delivery at the expense of header overhead (20–60 bytes) and 3-way handshake latency, while UDP provides minimal header overhead (8 bytes) and low latency without delivery guarantees.
+-->

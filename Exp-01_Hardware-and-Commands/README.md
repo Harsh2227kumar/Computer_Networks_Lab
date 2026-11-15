@@ -49,6 +49,31 @@ Batch: B2
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--
 ================================================================================
                     LAB PRACTICAL EXAMINATION WRITE-UP (5 MARKS)
@@ -87,3 +112,4 @@ To study and identify fundamental computer networking hardware components (NIC, 
 
 ### 4. CONCLUSION
 Successfully inspected and identified core networking hardware devices and demonstrated the operation of essential network diagnostic commands. Evaluated round-trip time, route hops, socket states, and local ARP/DNS resolution tables.
+-->

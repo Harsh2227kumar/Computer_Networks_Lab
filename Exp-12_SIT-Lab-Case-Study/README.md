@@ -41,6 +41,31 @@ Batch: B2
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--
 ================================================================================
                     LAB PRACTICAL EXAMINATION WRITE-UP (5 MARKS)
@@ -77,3 +102,4 @@ To conduct an architectural case study of the SIT Computer Networking Laboratory
 
 ### 4. CONCLUSION
 Successfully analyzed the enterprise networking architecture of the SIT Computer Networking Laboratory. Evaluated physical star topology implementation, structured Cat6 cabling, access layer switch configuration, DHCP/NAT operations, and perimeter UTM firewall security mechanisms.
+-->

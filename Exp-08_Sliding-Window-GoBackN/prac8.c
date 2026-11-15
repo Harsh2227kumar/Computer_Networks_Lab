@@ -103,6 +103,31 @@ void receiver(int frames[], int start, int window_size) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 ================================================================================
                     LAB PRACTICAL EXAMINATION WRITE-UP (5 MARKS)
