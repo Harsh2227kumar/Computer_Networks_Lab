@@ -21,3 +21,106 @@ Batch: B2
 ## Wireshark Filters
 * `tcp` : Displays TCP segment traffic showing 3-way handshake (`SYN`, `SYN-ACK`, `ACK`).
 * `udp` : Displays UDP datagram traffic showing lightweight single-packet DNS/media requests.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+================================================================================
+                    LAB PRACTICAL EXAMINATION WRITE-UP (5 MARKS)
+================================================================================
+-->
+
+# Practical Examination Write-Up: Experiment 7
+
+### 1. AIM
+To capture, inspect, and comparatively analyze Transmission Control Protocol (TCP) and User Datagram Protocol (UDP) packets at the Transport Layer using Wireshark Packet Analyzer.
+
+### 2. THEORY
+* **Transport Layer Role:** Provides logical process-to-process communication between application processes running on different hosts. Uses 16-bit port numbers (0 to 65535) for multiplexing and demultiplexing.
+* **TCP Protocol Structure & Mechanisms:**
+  - **Header Size:** 20 to 60 Bytes (variable length depending on Options field).
+  - **Control Flags (6 bits minimum):** `URG`, `ACK`, `PSH`, `RST`, `SYN`, `FIN`.
+  - **Connection Establishment (3-Way Handshake):**
+    1. Client $
+ightarrow$ Server: `[SYN]`, Seq = Initial Seq Number ($ISN_c$).
+    2. Server $
+ightarrow$ Client: `[SYN, ACK]`, Seq = $ISN_s$, Ack = $ISN_c + 1$.
+    3. Client $
+ightarrow$ Server: `[ACK]`, Seq = $ISN_c + 1$, Ack = $ISN_s + 1$.
+  - **Reliability:** Maintained through Sequence Numbers, Acknowledgments, Retransmission Timers (RTO), and Checksum.
+  - **Flow Control:** Sliding Window mechanism via Advertised Window Size field.
+* **UDP Protocol Structure & Mechanisms:**
+  - **Header Size:** Fixed 8 Bytes (minimal protocol overhead).
+  - **Fields:** Source Port (16-bit), Destination Port (16-bit), Length (16-bit), Checksum (16-bit).
+  - **Operation:** Connectionless, best-effort datagram service without ordering, acknowledgment, flow control, or congestion control.
+
+### 3. EXPLANATION / PROCEDURE
+1. **Packet Capture Setup:** Start capture in Wireshark on active network interface.
+2. **TCP Analysis:**
+   - In browser/terminal, access an HTTP/HTTPS website to initiate TCP traffic.
+   - Apply Wireshark filter: `tcp.flags.syn == 1`.
+   - Locate and examine the 3-Way Handshake sequence (`SYN` $
+ightarrow$ `SYN, ACK` $
+ightarrow$ `ACK`).
+   - Inspect Sequence Numbers (relative vs. raw), Acknowledgment Numbers, TCP Header Length (Data Offset), Window Size scaling, and MSS (Maximum Segment Size) in TCP Options.
+   - Inspect connection termination: locate `FIN` and `ACK` segments.
+3. **UDP Analysis:**
+   - Filter Wireshark capture with `udp`.
+   - Inspect a DNS or NTP datagram: note the compact 8-byte header structure without connection flags, sequence numbers, or window sizes.
+4. **Comparative Analysis:** Compare overhead, handshake latency, and packet header complexity between TCP and UDP captures.
+
+### 4. CONCLUSION
+Successfully inspected and compared Transport Layer protocols using Wireshark. Confirmed that TCP provides reliable, ordered data delivery at the expense of header overhead (20–60 bytes) and 3-way handshake latency, while UDP provides minimal header overhead (8 bytes) and low latency without delivery guarantees.
+-->
