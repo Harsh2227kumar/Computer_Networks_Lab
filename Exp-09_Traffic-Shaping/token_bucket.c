@@ -1,42 +1,37 @@
-/*
- * Name: Yash Khadgi
- * PRN: 24070521137
- * Batch: B2
- */
 
 #include <stdio.h>
 
 int main() {
-    int bucket_size, n, rate, tokens = 0, incoming, i;
+    int capacity, rate, n, tokens = 0, packet;
 
-    printf("Token Bucket Algorithm Simulation\n");
-    printf("Enter bucket size (capacity): ");
-    scanf("%d", &bucket_size);
+    printf("Enter bucket capacity: ");
+    scanf("%d", &capacity);
+
     printf("Enter token generation rate: ");
     scanf("%d", &rate);
-    printf("Enter number of time units: ");
+
+    printf("Enter number of packets: ");
     scanf("%d", &n);
 
-    for (i = 0; i < n; i++) {
-        printf("\nTime unit %d:\n", i + 1);
+    for (int i = 1; i <= n; i++) {
+        printf("\nEnter packet %d size: ", i);
+        scanf("%d", &packet);
+
         tokens += rate;
-        if (tokens > bucket_size) tokens = bucket_size;
 
-        printf("Enter number of packets to send: ");
-        scanf("%d", &incoming);
+        if (tokens > capacity)
+            tokens = capacity;
 
-        if (tokens >= incoming) {
-            printf("Packets sent: %d\n", incoming);
-            tokens -= incoming;
+        printf("Available tokens: %d\n", tokens);
+
+        if (packet <= tokens) {
+            tokens -= packet;
+            printf("Packet transmitted successfully!\n");
         } else {
-            printf("Only %d tokens available, packets sent: %d, packets dropped: %d\n",
-                    tokens, tokens, incoming - tokens);
-            tokens = 0;
+            printf("Insufficient tokens! Packet dropped.\n");
         }
-        printf("Tokens left: %d\n", tokens);
     }
 
-    printf("\nSimulation complete.\n");
     return 0;
 }
 
@@ -95,47 +90,48 @@ int main() {
 
 
 /*
-================================================================================
-                    LAB PRACTICAL EXAMINATION WRITE-UP (5 MARKS)
-================================================================================
 
-1. AIM:
-   To implement and simulate the Token Bucket Traffic Shaping Algorithm in C to
-   allow regulated bursty transmissions while maintaining a bounded average rate.
 
-2. THEORY:
-   - Token Bucket vs. Leaky Bucket:
-     * Leaky bucket enforces a rigid, constant output rate regardless of network
-       idle time.
-     * Token bucket stores transmission credits (tokens). It allows bursty packet
-       transmissions up to the maximum capacity of accumulated tokens, while
-       limiting the long-term average transmission rate to the token generation rate.
-   - Token Bucket Mechanism:
-     * Tokens are generated at a constant rate $r$ tokens/second and deposited into
-       a bucket of maximum capacity $b$.
-     * If the bucket is full of tokens ($tokens = b$), newly generated tokens are discarded.
-     * To transmit $k$ packets, $k$ tokens must be removed from the bucket.
-     * If sufficient tokens exist ($tokens \ge incoming$), all packets are transmitted
-       immediately at line speed (burst).
-     * If fewer tokens are available ($tokens < incoming$), packets equal to available
-       tokens are sent, and remaining packets are dropped or queued.
+# **Token Bucket Algorithm in C**
 
-3. EXPLANATION / ALGORITHM:
-   - Step 1: Input token bucket capacity, token generation rate ($r$), and time units ($n$).
-   - Step 2: Initialize tokens = 0.
-   - Step 3: Loop for each time unit $i = 1$ to $n$:
-     * Add newly generated tokens: tokens = min(bucket_size, tokens + rate).
-     * Input number of incoming packets to send.
-     * Check token sufficiency:
-       - If tokens >= incoming: transmit all incoming packets; deduct tokens (tokens -= incoming).
-       - If tokens < incoming: transmit tokens count of packets; drop/delay excess
-         (incoming - tokens); reset tokens = 0.
-     * Display packets transmitted, dropped, and remaining tokens in the bucket.
-   - Step 4: Display simulation completion status.
+### **1. AIM**
 
-4. CONCLUSION:
-   Successfully simulated the Token Bucket algorithm in C. Demonstrated how token
-   accumulation enables short-term traffic bursts without data loss while
-   constraining the long-term average transmission rate to the token generation rate.
-================================================================================
+To implement the Token Bucket Algorithm in C for network traffic shaping and congestion control.
+
+### **2. THEORY**
+
+The Token Bucket Algorithm is a traffic control technique used in computer networks to regulate the rate of data transmission. Tokens are added to a bucket at a fixed rate, and each packet requires tokens before it can be transmitted.
+
+The bucket has a fixed capacity. If the bucket becomes full, newly generated tokens are discarded. If sufficient tokens are available, packets are transmitted; otherwise, they are delayed or dropped. This algorithm controls the average transmission rate while allowing short bursts of data.
+
+### **3. ALGORITHM**
+
+1. **Start** and initialize the number of available tokens as `tokens = 0`.
+2. **Input** the bucket capacity, token generation rate and total number of packets.
+3. For each packet:
+   - Input the packet size.
+   - Add newly generated tokens:
+
+\\[ tokens = tokens + rate \\]
+
+\- If tokens exceed bucket capacity, limit them to the maximum capacity:
+
+\\[ tokens = \min(tokens, capacity) \\]
+
+4\. **Check packet transmission:**
+
+\- If `packet <= tokens`:
+
+- Transmit the packet.
+- Reduce tokens by packet size:
+
+\\[ tokens = tokens - packet \\]
+
+\- Otherwise, drop the packet due to insufficient tokens.
+
+5. Repeat Steps 3–4 until all packets are processed.
+6. **Stop.**
+
+### **4. CONCLUSION**
+
 */
