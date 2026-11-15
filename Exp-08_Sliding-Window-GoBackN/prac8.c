@@ -148,15 +148,51 @@ If a frame is lost or damaged, the receiver discards that frame and subsequent o
 
 ### **3. ALGORITHM**
 
-1. Start and input the total number of frames (`n`) and window size (`w`).
-2. Initialize `base = 0`.
-3. Send frames from `base` to `base + w - 1`, or until all frames are sent.
-4. Display received frames and their acknowledgments (ACK).
-5. Ask the user whether all frames were received correctly.
-6. If Yes (`Y`), slide the window forward by updating `base = base + w`.
-7. If No (`N`), retransmit all frames in the current window without changing `base`.
-8. Repeat until all frames are acknowledged.
-9. Stop.
+
+
+
+1\. **Start** and declare the maximum number of frames as `50`.
+
+2\. Input the total number of frames (`n`) and window size (`window_size`). Validate the inputs to ensure they are within the allowed range.
+
+3\. Initialize the frame array:\
+\\[\
+frames[i] = i,\quad 0 \leq i < n\
+\\]
+
+4\. Call the `sender()` function and initialize `base = 0`.
+
+5\. **Sender Process:**
+
+- Display the current sender window.
+- Transmit frames from `base` to `base + window_size - 1`.
+- Ensure that the frame limit does not exceed the total number of frames.
+
+6\. **Receiver Process:**
+
+- Call the `receiver()` function.
+- Display each received frame.
+- Generate acknowledgment:\
+  \\[\
+  ACK = frame + 1\
+  \\]
+
+7\. Ask the user whether all frames were received correctly (`y/n`).
+
+8\. **Check acknowledgment status:**
+
+- If `y` or `Y`, slide the window forward:\
+  \\[\
+  base = base + window_size\
+  \\]
+- If `n` or `N`, retransmit all frames in the current window without changing `base`.
+
+9\. Repeat Steps 5–8 until all frames are successfully acknowledged (`base >= n`).
+
+10\. Display **"All frames sent successfully!"** and stop.
+
+
+
 
 ### **4. CONCLUSION**
 
